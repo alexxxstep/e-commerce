@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -20,13 +21,16 @@ const HomeScreen = () => {
 
   // const products = [];
 
+
   return (
     <>
       <h1>Latest Products</h1>
+
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
+
       ) : (
         <Row>
           {products.map((product, index) => (

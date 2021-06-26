@@ -1,10 +1,15 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { Card, Button } from 'react-bootstrap'
-import Rating from './Rating';
-
+import Rating from './Rating'
 
 const Product = ({ product }) => {
+  let history = useHistory()
+
+  const addToCartHandler = () => {
+    history.push(`/cart/${product._id}?qty=${1}`)
+  }
+
   return (
     <Card className="my-3 p-3 rounded">
       <Link to={`/products/${product._id}`}>
@@ -28,6 +33,7 @@ const Product = ({ product }) => {
         <Card.Text as="h3">${product.price}</Card.Text>
 
         <Button
+          onClick={addToCartHandler}
           className="btn-block rounded"
           type="button"
           disabled={product.countInStock === 0}

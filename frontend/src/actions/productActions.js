@@ -1,8 +1,11 @@
+
 import axios from 'axios';
+
 import {
   PRODUCT_LIST_REQUEST,
   PRODUCT_LIST_SUCCESS,
   PRODUCT_LIST_FAIL,
+
 } from '../constants/productConstants.js';
 
 export const listProducts = (params) => async (dispatch) => {
@@ -10,6 +13,7 @@ export const listProducts = (params) => async (dispatch) => {
     dispatch({ type: PRODUCT_LIST_REQUEST });
 
     const { data } = await axios.get('/api/products');
+
 
     dispatch({
       type: PRODUCT_LIST_SUCCESS,
@@ -22,3 +26,4 @@ export const listProducts = (params) => async (dispatch) => {
     });
   }
 };
+
