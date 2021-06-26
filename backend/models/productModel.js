@@ -1,4 +1,6 @@
-import mongoose from 'mongoose'
+
+import mongoose from 'mongoose';
+
 
 const reviewSchema = mongoose.Schema(
   {
@@ -10,6 +12,7 @@ const reviewSchema = mongoose.Schema(
       type: Number,
       required: true,
       default: 0,
+
     },
     comment: {
       type: String,
@@ -19,7 +22,8 @@ const reviewSchema = mongoose.Schema(
   {
     timestamps: true,
   }
-)
+);
+
 
 const productSchema = mongoose.Schema(
   {
@@ -48,12 +52,16 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+
+    reviews: [reviewSchema],
+
+
     rating: {
       type: Number,
       required: true,
       default: 0,
     },
-    reviews: [reviewSchema],
+
     numReviews: {
       type: Number,
       required: true,
@@ -70,11 +78,11 @@ const productSchema = mongoose.Schema(
       default: 0,
     },
   },
-  {
-    timestamps: true,
-  }
-)
 
-const Product = mongoose.model('Product', productSchema)
+  { timestamps: true }
+);
 
-export default Product
+const Product = mongoose.model('Product', productSchema);
+
+export default Product;
+
