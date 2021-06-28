@@ -1,42 +1,45 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
-import Message from '../components/Message'
-import { addToCart, removeFromCart } from '../actions/cartActions'
+import React, {useEffect} from 'react';
+import {Link} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {Row, Col, ListGroup, Image, Form, Button, Card} from 'react-bootstrap';
+import Message from '../components/Message';
+import {addToCart, removeFromCart} from '../actions/cartActions';
 
-const CartScreen = ({ match, location, history }) => {
-  const productId = match.params.id
+const CartScreen = ({match, location, history}) => {
+  const productId = match.params.id;
 
-  const qty = location.search ? Number(location.search.split('=')[1]) : 1
+  const qty = location.search ? Number(location.search.split('=')[1]) : 1;
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const cart = useSelector((state) => state.cart)
-  const { cartItems } = cart
+  const cart = useSelector((state) => state.cart);
+  const {cartItems} = cart;
 
   useEffect(() => {
     if (productId) {
-      dispatch(addToCart(productId, qty))
+      dispatch(addToCart(productId, qty));
     }
-  }, [dispatch, productId, qty])
+  }, [dispatch, productId, qty]);
 
   const removeFromCartHandler = (id) => {
-    dispatch(removeFromCart(id))
-  }
+    dispatch(removeFromCart(id));
+  };
   const checkoutHandler = () => {
-    history.push('/login?redirect=shipping')
-  }
+    history.push('/login?redirect=shipping');
+  };
 
   return (
     <Row>
       <Col md={8}>
         <h1>Shoping Cart</h1>
-        <Link className="btn btn-light my-1 rounded" to={`/`}>
-          Go Back
-        </Link>
         {cartItems.length === 0 ? (
-          <Message>Your cart is empty</Message>
+          <Message>
+            <span>Your cart is empty </span>
+
+            <Link className="btn btn-light my-1 rounded" to={`/`}>
+              Go Back
+            </Link>
+          </Message>
         ) : (
           <ListGroup variant="flush">
             {cartItems.map((item) => (
@@ -54,7 +57,9 @@ const CartScreen = ({ match, location, history }) => {
                       as="select"
                       value={item.qty}
                       onChange={(e) =>
-                        dispatch(addToCart(item.product, e.target.value))
+                        dispatch(
+                          addToCart(item.product, Number(e.target.value))
+                        )
                       }
                     >
                       {[...Array(item.countInStock).keys()].map((x) => (
@@ -115,7 +120,7 @@ const CartScreen = ({ match, location, history }) => {
         </Card>
       </Col>
     </Row>
-  )
-}
+  );
+};
 
-export default CartScreen
+export default CartScreen;
