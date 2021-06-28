@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcryptjs'
 
+
 const userSchema = mongoose.Schema(
   {
     name: {
@@ -22,6 +23,7 @@ const userSchema = mongoose.Schema(
       default: false,
     },
   },
+
   {
     timestamps: true,
   }
@@ -43,3 +45,4 @@ userSchema.pre('save', async function (next) {
 const User = mongoose.model('User', userSchema)
 
 export default User
+
